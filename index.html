@@ -1,0 +1,1844 @@
+# SSG2026
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신세계리테일랩 냉장 간편식 프로모션 현장 운영 체크리스트</title>
+  <style>
+    /* ==========================================================================
+       Shinsegae Retail Lab Design System
+       ========================================================================== */
+    :root {
+      --color-primary: #8a1538;          /* 신세계 딥 버건디 */
+      --color-primary-dark: #630c25;     /* 다크 버건디 */
+      --color-primary-light: #fbf2f4;    /* 아주 연한 버건디 백그라운드 */
+      --color-accent-gold: #c5a059;      /* 프리미엄 샴페인 골드 */
+      --color-accent-gold-light: #f8f4eb;
+
+      --color-bg: #f4f5f8;               /* 메인 배경색 */
+      --color-surface: #ffffff;          /* 카드 및 모달 서피스 */
+      --color-border: #e2e8f0;
+      --color-border-hover: #cbd5e1;
+
+      --color-text-main: #1e293b;
+      --color-text-sub: #64748b;
+      --color-text-muted: #94a3b8;
+
+      --color-risk-high: #e11d48;        /* High Risk */
+      --color-risk-high-bg: #ffe4e6;
+      --color-risk-med: #d97706;         /* Medium Risk */
+      --color-risk-med-bg: #fef3c7;
+      --color-risk-normal: #059669;      /* Normal Risk */
+      --color-risk-normal-bg: #d1fae5;
+
+      --color-success: #16a34a;
+      --color-success-bg: #dcfce7;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--color-bg);
+      color: var(--color-text-main);
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+
+    /* Top Brand Navigation Bar */
+    .brand-bar {
+      background-color: var(--color-primary-dark);
+      color: #ffffff;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      border-bottom: 2px solid var(--color-accent-gold);
+    }
+    .brand-logo {
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-logo span {
+      color: var(--color-accent-gold);
+    }
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* Main Container */
+    .app-container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header & Dashboard Section */
+    .dashboard-card {
+      background-color: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 24px;
+      border: 1px solid var(--color-border);
+    }
+
+    .dashboard-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .header-title-area h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-title-area p {
+      color: var(--color-text-sub);
+      font-size: 0.9rem;
+    }
+
+    /* D-Day Counter Box */
+    .dday-badge-box {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-accent-gold);
+      min-width: 220px;
+    }
+
+    .dday-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.9;
+      color: var(--color-accent-gold-light);
+    }
+
+    .dday-value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-top: 2px;
+      letter-spacing: -0.5px;
+    }
+
+    /* Meta Info Grid */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .meta-card {
+      background-color: var(--color-bg);
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      border-left: 4px solid var(--color-primary);
+    }
+
+    .meta-card .label {
+      font-size: 0.75rem;
+      color: var(--color-text-sub);
+      font-weight: 600;
+    }
+
+    .meta-card .val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-text-main);
+      margin-top: 2px;
+    }
+
+    /* Overall Progress Bar */
+    .progress-section {
+      background-color: var(--color-primary-light);
+      padding: 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(138, 21, 56, 0.15);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .progress-track {
+      height: 14px;
+      background-color: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-accent-gold), var(--color-primary));
+      width: 0%;
+      transition: width 0.4s ease;
+      border-radius: 10px;
+    }
+
+    /* Buttons Style */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      background-color: var(--color-surface);
+      color: var(--color-text-main);
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: #ffffff;
+    }
+
+    .btn-gold {
+      background-color: var(--color-accent-gold);
+      color: #ffffff;
+    }
+
+    .btn-outline {
+      border-color: var(--color-border-hover);
+      background-color: #ffffff;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--color-bg);
+    }
+
+    .btn-danger {
+      background-color: var(--color-risk-high-bg);
+      color: var(--color-risk-high);
+      border-color: rgba(225, 29, 72, 0.2);
+    }
+
+    .btn-sm {
+      padding: 4px 10px;
+      font-size: 0.8rem;
+    }
+
+    /* Layout Split */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 24px;
+    }
+
+    @media (max-width: 1024px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Filters & Controls Section */
+    .control-card {
+      background-color: var(--color-surface);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-border);
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .filter-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .filter-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-text-sub);
+      min-width: 60px;
+    }
+
+    .tab-pill {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      border-radius: 20px;
+      background-color: var(--color-bg);
+      color: var(--color-text-sub);
+      cursor: pointer;
+      border: 1px solid var(--color-border);
+      font-weight: 500;
+      user-select: none;
+      transition: all 0.15s;
+    }
+
+    .tab-pill.active {
+      background-color: var(--color-primary);
+      color: #ffffff;
+      border-color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .search-input-box {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .search-input-box input {
+      width: 100%;
+      padding: 8px 12px 8px 32px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .search-input-box input:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(138, 21, 56, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Checklist Section */
+    .checklist-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .category-block {
+      background-color: var(--color-surface);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+    }
+
+    .category-header {
+      background-color: #fafafa;
+      padding: 12px 16px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--color-primary-dark);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .category-count {
+      font-size: 0.8rem;
+      color: var(--color-text-sub);
+      font-weight: 500;
+    }
+
+    .check-item {
+      padding: 16px;
+      border-bottom: 1px solid var(--color-border);
+      transition: background-color 0.15s;
+    }
+
+    .check-item:last-child {
+      border-bottom: none;
+    }
+
+    .check-item:hover {
+      background-color: #fcfcfd;
+    }
+
+    .check-item.completed {
+      background-color: #f8fafc;
+    }
+
+    .check-item.completed .item-title {
+      text-decoration: line-through;
+      color: var(--color-text-sub);
+    }
+
+    .check-main-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .custom-checkbox {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      cursor: pointer;
+      accent-color: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    .item-content {
+      flex: 1;
+    }
+
+    .item-meta-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 6px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .badge-high { background-color: var(--color-risk-high-bg); color: var(--color-risk-high); }
+    .badge-medium { background-color: var(--color-risk-med-bg); color: var(--color-risk-med); }
+    .badge-normal { background-color: var(--color-risk-normal-bg); color: var(--color-risk-normal); }
+    .badge-dept { background-color: #e2e8f0; color: #334155; }
+    .badge-store { background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+    .badge-date { background-color: #fef2f2; color: #991b1b; }
+
+    .item-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text-main);
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+
+    /* Accordion Details */
+    .item-details-toggle {
+      font-size: 0.8rem;
+      color: var(--color-primary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .details-box {
+      margin-top: 8px;
+      padding: 10px 12px;
+      background-color: #f8fafc;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--color-accent-gold);
+      font-size: 0.85rem;
+      color: #334155;
+      display: none;
+    }
+
+    .details-box.show {
+      display: block;
+    }
+
+    /* Store Memo Box */
+    .memo-area {
+      margin-top: 10px;
+    }
+
+    .memo-area textarea {
+      width: 100%;
+      height: 48px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      resize: vertical;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .memo-area textarea:focus {
+      border-color: var(--color-primary);
+    }
+
+    /* Sidebar Interactive Toolkits */
+    .toolkit-card {
+      background-color: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--color-border);
+      margin-bottom: 20px;
+    }
+
+    .toolkit-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 2px solid var(--color-primary-light);
+      padding-bottom: 8px;
+    }
+
+    /* Toolkit Tabs */
+    .toolkit-nav {
+      display: flex;
+      gap: 4px;
+      background-color: var(--color-bg);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+    }
+
+    .toolkit-nav-btn {
+      flex: 1;
+      padding: 6px 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: none;
+      background: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--color-text-sub);
+    }
+
+    .toolkit-nav-btn.active {
+      background-color: var(--color-surface);
+      color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Tool 1: Bundle Calculator */
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 280px;
+      overflow-y: auto;
+      padding-right: 4px;
+      margin-bottom: 12px;
+    }
+
+    .product-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+      background-color: var(--color-bg);
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+    }
+
+    .p-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .p-name { font-weight: 600; color: var(--color-text-main); }
+    .p-price { color: var(--color-text-sub); font-size: 0.75rem; }
+
+    .qty-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .qty-btn {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      border: 1px solid var(--color-border);
+      background: #ffffff;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preset-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .calc-summary {
+      background-color: var(--color-primary-light);
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      border: 1px dashed var(--color-primary);
+      font-size: 0.85rem;
+    }
+
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .calc-row.total {
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--color-primary-dark);
+      border-top: 1px solid rgba(138, 21, 56, 0.2);
+      padding-top: 6px;
+      margin-top: 6px;
+    }
+
+    /* Tool 2: CS Manual FAQ */
+    .cs-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cs-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .cs-q {
+      padding: 10px 12px;
+      background-color: #fafafa;
+      font-size: 0.83rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .cs-a {
+      padding: 10px 12px;
+      font-size: 0.8rem;
+      color: var(--color-text-main);
+      background-color: #ffffff;
+      border-top: 1px solid var(--color-border);
+      display: none;
+      line-height: 1.4;
+    }
+
+    .cs-a.show { display: block; }
+
+    /* Tool 4: Budget Tracker */
+    .budget-tracker-box {
+      font-size: 0.85rem;
+    }
+
+    .slider-container {
+      margin: 16px 0;
+    }
+
+    .budget-gauge {
+      height: 12px;
+      background-color: #e2e8f0;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 8px;
+      position: relative;
+    }
+
+    .budget-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--color-success);
+      transition: width 0.3s;
+    }
+
+    .budget-fill.warn { background-color: var(--color-risk-med); }
+    .budget-fill.danger { background-color: var(--color-risk-high); }
+
+    /* Modal Styling */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-window {
+      background-color: var(--color-surface);
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      padding: 24px;
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--color-primary);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--color-text-sub);
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toast {
+      background-color: var(--color-primary-dark);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      font-size: 0.85rem;
+      border-left: 4px solid var(--color-accent-gold);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Print View Customization */
+    @media print {
+      body { background-color: #ffffff; color: #000000; }
+      .brand-bar, .header-actions, .control-card, .main-grid > div:last-child, .btn, .memo-area { display: none !important; }
+      .main-grid { grid-template-columns: 1fr; }
+      .dashboard-card { border: none; box-shadow: none; padding: 0; }
+      .check-item { page-break-inside: avoid; }
+      .details-box { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Brand Navigation Bar -->
+  <header class="brand-bar">
+    <div class="brand-logo">
+      <span>SHINSEGAE</span> RETAIL LAB | Field Operations
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-danger btn-sm" onclick="openHotlineModal()">
+        🚨 4대 금지사항 & 핫라인
+      </button>
+      <button class="btn btn-outline btn-sm" onclick="copyReportSummary()">
+        📋 요약 복사
+      </button>
+      <button class="btn btn-outline btn-sm" onclick="exportJSON()">
+        📥 JSON 내보내기
+      </button>
+      <button class="btn btn-outline btn-sm" onclick="triggerImportJSON()">
+        📤 불러오기
+      </button>
+      <input type="file" id="importFileInput" style="display: none;" accept=".json" onchange="importJSON(event)">
+      <button class="btn btn-outline btn-sm" onclick="window.print()">
+        🖨️ 인쇄
+      </button>
+      <button class="btn btn-outline btn-sm" onclick="confirmResetData()">
+        🔄 초기화
+      </button>
+    </div>
+  </header>
+
+  <div class="app-container">
+
+    <!-- Dashboard Header Area -->
+    <section class="dashboard-card">
+      <div class="dashboard-top">
+        <div class="header-title-area">
+          <h1>2026 신세계 가을맞이 냉장 간편식 페스타 (2+ 10% OFF)</h1>
+          <p>현장 무결점 운영 및 본사-점포 실시간 통합 점검 웹 체크리스트</p>
+        </div>
+        <div class="dday-badge-box">
+          <div class="dday-label">D-DAY COUNTDOWN</div>
+          <div class="dday-value" id="ddayText">D-17 (00:00:00)</div>
+        </div>
+      </div>
+
+      <!-- Meta Grid -->
+      <div class="meta-grid">
+        <div class="meta-card">
+          <div class="label">행사 기간</div>
+          <div class="val">2026.09.04(금) ~ 09.10(목) [7일간]</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">대상 점포</div>
+          <div class="val">센트럴점 / 리버점 / 파크점 (3개점)</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">프로모션 조건</div>
+          <div class="val">냉장 HMR 6종 2개 이상 선택 시 10% 할인</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">총 할인보전 예산</div>
+          <div class="val">8,000,000원 (VAT 포함)</div>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-section">
+        <div class="progress-header">
+          <span>전체 점검 진행률</span>
+          <span id="progressPercent">0% (0 / 16 항목 완료)</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressBar"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <div class="main-grid">
+
+      <!-- Left Column: Filter & Checklist -->
+      <main>
+        <!-- Filter Bar -->
+        <section class="control-card">
+          <!-- Store Filter -->
+          <div class="filter-group">
+            <span class="filter-label">점포</span>
+            <div class="tab-pill active" onclick="setFilter('store', 'all', this)">전체 점포</div>
+            <div class="tab-pill" onclick="setFilter('store', 'central', this)">센트럴점</div>
+            <div class="tab-pill" onclick="setFilter('store', 'river', this)">리버점</div>
+            <div class="tab-pill" onclick="setFilter('store', 'park', this)">파크점</div>
+          </div>
+
+          <!-- Category Filter -->
+          <div class="filter-group">
+            <span class="filter-label">부서</span>
+            <div class="tab-pill active" onclick="setFilter('category', 'all', this)">전체 부서</div>
+            <div class="tab-pill" onclick="setFilter('category', 'store', this)">점포운영/VMD</div>
+            <div class="tab-pill" onclick="setFilter('category', 'scm', this)">SCM/물류</div>
+            <div class="tab-pill" onclick="setFilter('category', 'it', this)">IT/POS</div>
+            <div class="tab-pill" onclick="setFilter('category', 'cs', this)">CS/교육</div>
+            <div class="tab-pill" onclick="setFilter('category', 'budget', this)">예산/비상</div>
+          </div>
+
+          <!-- Status & Search Filter -->
+          <div class="filter-group">
+            <span class="filter-label">상태</span>
+            <div class="tab-pill active" onclick="setFilter('status', 'all', this)">전체</div>
+            <div class="tab-pill" onclick="setFilter('status', 'uncompleted', this)">미완료만</div>
+            <div class="tab-pill" onclick="setFilter('status', 'completed', this)">완료만</div>
+            <div class="tab-pill" onclick="setFilter('status', 'high-risk', this)">High Risk 🔴</div>
+
+            <div class="search-input-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="searchInput" placeholder="검색어 (제목, 부서, 세부내용)..." oninput="handleSearch(this.value)">
+            </div>
+          </div>
+        </section>
+
+        <!-- Dynamic Checklist Render Box -->
+        <section id="checklistContainer" class="checklist-container">
+          <!-- JS dynamic render -->
+        </section>
+      </main>
+
+      <!-- Right Column: Interactive Field Toolkits -->
+      <aside>
+        <div class="toolkit-card">
+          <div class="toolkit-title">
+            <span>🛠️</span> 현장 운영 인터랙티브 툴킷
+          </div>
+
+          <!-- Toolkit Navigation -->
+          <div class="toolkit-nav">
+            <button class="toolkit-nav-btn active" onclick="switchToolkit('calc', this)">POS 시뮬레이터</button>
+            <button class="toolkit-nav-btn" onclick="switchToolkit('cs', this)">CS 응대/FAQ</button>
+            <button class="toolkit-nav-btn" onclick="switchToolkit('budget', this)">예산 트래커</button>
+          </div>
+
+          <!-- Tool 1: POS Bundle Discount Calculator -->
+          <div id="toolkit-calc" class="toolkit-panel">
+            <p style="font-size: 0.8rem; color: var(--color-text-sub); margin-bottom: 10px;">
+              수량을 선택하여 교차 2개 이상 구매 시 10% 번들 할인 적용 여부를 즉시 검증합니다.
+            </p>
+
+            <div id="productList" class="product-list">
+              <!-- JS dynamic render -->
+            </div>
+
+            <!-- Test Preset Buttons -->
+            <div class="preset-btns">
+              <button class="btn btn-outline btn-sm" onclick="setPresetCart('single')">단품 1개 (할인불가)</button>
+              <button class="btn btn-outline btn-sm" onclick="setPresetCart('same2')">동일 2개 (10% 할인)</button>
+              <button class="btn btn-outline btn-sm" onclick="setPresetCart('cross3')">교차 3개 (10% 할인)</button>
+              <button class="btn btn-outline btn-sm" onclick="resetCart()">수량 초기화</button>
+            </div>
+
+            <!-- Calc Result Summary -->
+            <div class="calc-summary">
+              <div class="calc-row">
+                <span>선택 총 수량:</span>
+                <strong id="calcTotalQty">0개</strong>
+              </div>
+              <div class="calc-row">
+                <span>정상가 합계:</span>
+                <span id="calcBasePrice">0원</span>
+              </div>
+              <div class="calc-row" style="color: var(--color-risk-high);">
+                <span>2+ 번들 할인액 (10%):</span>
+                <strong id="calcDiscountPrice">-0원</strong>
+              </div>
+              <div class="calc-row total">
+                <span>최종 결제 금액:</span>
+                <span id="calcFinalPrice">0원</span>
+              </div>
+              <div style="font-size: 0.75rem; color: var(--color-text-sub); margin-top: 6px; text-align: right;">
+                예상 신세계포인트: <span id="calcPoints" style="color: var(--color-primary); font-weight:700;">0p</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tool 2: CS Manual & FAQ -->
+          <div id="toolkit-cs" class="toolkit-panel" style="display: none;">
+            <div class="cs-accordion">
+              <div class="cs-card">
+                <div class="cs-q" onclick="toggleCS(this)">
+                  <span>🗣️ 1개 구매 고객이 할인 요구 시 응대</span>
+                  <span>▼</span>
+                </div>
+                <div class="cs-a">
+                  "고객님, 본 행사는 냉장 간편식 6종 중 2개 이상 구매 시 10% 할인이 적용되는 프로모션입니다. 동일 상품이나 다른 6종 행사 상품을 1개 더 선택하시면 할인 혜택을 받으실 수 있습니다."
+                </div>
+              </div>
+
+              <div class="cs-card">
+                <div class="cs-q" onclick="toggleCS(this)">
+                  <span>🗣️ 특정 상품 품절 시 대체 상품 안내</span>
+                  <span>▼</span>
+                </div>
+                <div class="cs-a">
+                  "죄송합니다, 고객님. 말씀하신 상품은 인기로 인해 현재 일시 품절되었습니다. 동일 라인업인 '트러플 크림 파스타'나 '치즈 라자냐' 상품도 2+ 10% 행사에 포함되오니 이용에 참고해 주시겠습니까?"
+                </div>
+              </div>
+
+              <div class="cs-card">
+                <div class="cs-q" onclick="toggleCS(this)">
+                  <span>❓ FAQ: 6종 교차 구매가 가능한가요?</span>
+                  <span>▼</span>
+                </div>
+                <div class="cs-a">
+                  네, 가능합니다. 대상 HMR 6종 내에서는 어떤 조합으로 2개 이상 선택하셔도 일률 10% 할인이 자동 적용됩니다.
+                </div>
+              </div>
+
+              <div class="cs-card">
+                <div class="cs-q" onclick="toggleCS(this)">
+                  <span>❓ FAQ: 부분 환불 시 할인 반환 규정</span>
+                  <span>▼</span>
+                </div>
+                <div class="cs-a">
+                  2개 구매 후 1개를 부분 환불할 경우, 남아있는 상품이 1개가 되어 2+ 할인 조건이 해제되므로 정상가 기준으로 자동 재계산 처리됩니다.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tool 4: Budget Tracker Simulator -->
+          <div id="toolkit-budget" class="toolkit-panel" style="display: none;">
+            <div class="budget-tracker-box">
+              <p style="font-size: 0.8rem; color: var(--color-text-sub);">
+                예상 판매 수량을 조절하여 총 할인보전 예산(800만원) 대비 소진율을 추정합니다.
+              </p>
+
+              <div class="slider-container">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                  <span>예상 판매 수량:</span>
+                  <strong id="budgetItemCountText">4,500개</strong>
+                </div>
+                <input type="range" id="budgetSlider" min="0" max="8500" step="100" value="4500" style="width: 100%; cursor: pointer;" oninput="updateBudgetTracker(this.value)">
+              </div>
+
+              <div class="calc-summary" style="background-color: #ffffff; border-color: var(--color-border);">
+                <div class="calc-row">
+                  <span>추정 할인보전금 (수량 × 950원):</span>
+                  <strong id="budgetBurnVal">4,275,000원</strong>
+                </div>
+                <div class="calc-row">
+                  <span>총 예산 한도:</span>
+                  <span>8,000,000원</span>
+                </div>
+                <div class="calc-row">
+                  <span>예산 소진율:</span>
+                  <strong id="budgetPercentText">53.4%</strong>
+                </div>
+
+                <div class="budget-gauge">
+                  <div id="budgetGaugeFill" class="budget-fill" style="width: 53.4%;"></div>
+                </div>
+
+                <div id="budgetAlertMsg" style="margin-top: 10px; font-size: 0.78rem; font-weight: 700; color: var(--color-success);">
+                  🟢 예산 소진 안전 범위 내 운영 중입니다.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+    </div>
+
+  </div>
+
+  <!-- Modal: 4대 금지사항 & 비상 핫라인 -->
+  <div id="hotlineModal" class="modal-backdrop">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title">🚨 현장 필수 준수 4대 금지사항 & 비상 핫라인</div>
+        <button class="modal-close" onclick="closeHotlineModal()">×</button>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <h4 style="font-size: 0.95rem; color: var(--color-risk-high); margin-bottom: 8px;">[ 필수 준수 4대 금지 사항 ]</h4>
+        <ul style="font-size: 0.85rem; line-height: 1.6; padding-left: 20px; color: #334155;">
+          <li><strong>1. 가격 임의 수기 변경 금지:</strong> POS 등록가 및 타임세일 수기 할인을 엄격히 금지합니다.</li>
+          <li><strong>2. 고객 임의 보상/증정 약속 금지:</strong> 본사 승인 없는 수기 사은품 지급을 차단합니다.</li>
+          <li><strong>3. 승인되지 않은 외부 메일/스크립트 발송 금지:</strong> 보안 규정을 준수합니다.</li>
+          <li><strong>4. POS 로그 및 기획 데이터 임의 삭제 금지:</strong> 시스템 기록 유지를 철저히 합니다.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-size: 0.95rem; color: var(--color-primary); margin-bottom: 8px;">[ 4단계 긴급 보고 체계 ]</h4>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.82rem;">
+          <div style="background-color: var(--color-bg); padding: 8px 12px; border-radius: 4px;">
+            <strong>1단계 (현장):</strong> 점포 책임자 즉시 보고 (센트럴/리버/파크 매니저)
+          </div>
+          <div style="background-color: var(--color-bg); padding: 8px 12px; border-radius: 4px;">
+            <strong>2단계 (본사):</strong> 마케팅팀 긴급 핫라인 📞 02-1234-5678 / 010-9876-5432
+          </div>
+          <div style="background-color: var(--color-bg); padding: 8px 12px; border-radius: 4px;">
+            <strong>3단계 (IT/POS):</strong> 시스템 기술 대응팀 📞 02-1234-5679
+          </div>
+          <div style="background-color: var(--color-bg); padding: 8px 12px; border-radius: 4px;">
+            <strong>4단계 (SCM):</strong> 콜드체인 물류 상황실 📞 02-1234-5680
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- App Script Logic -->
+  <script>
+    /* ==========================================================================
+       Initial Data & Seed Specifications
+       ========================================================================== */
+    const STORAGE_KEY = 'shinsegae_hmr_checklist_2026';
+
+    const HMR_PRODUCTS = [
+      { id: "HMR-101", name: "시그니처 바베큐 풀드포크 플래터", spec: "450g", price: 12800, discountPrice: 11520 },
+      { id: "HMR-102", name: "트러플 크림 파스타 밀키트", spec: "380g", price: 9900, discountPrice: 8910 },
+      { id: "HMR-103", name: "통삼겹 김치찜", spec: "500g", price: 11500, discountPrice: 10350 },
+      { id: "HMR-104", name: "갈릭 버터 쉬림프 샐러드볼", spec: "320g", price: 8900, discountPrice: 8010 },
+      { id: "HMR-105", name: "한우 우거지 소고기국밥", spec: "550g", price: 10500, discountPrice: 9450 },
+      { id: "HMR-106", name: "리치 치즈 라자냐", spec: "400g", price: 9500, discountPrice: 8550 }
+    ];
+
+    const INITIAL_CHECKLIST = [
+      // 1. 점포 운영 및 진열 환경 점검
+      {
+        id: "chk-store-01",
+        category: "store",
+        categoryName: "점포 운영 및 진열 환경",
+        title: "점포별 매대 실측 및 진열 도면(Planogram) 확정",
+        risk: "high",
+        deadline: "2026-08-25",
+        department: "점포운영팀",
+        store: "all",
+        details: "센트럴점(메인 오픈 쇼케이스 3단+엔드캡), 리버점(HMR 전용존+온도계), 파크점(신선 평대 냉기 통로 확보)",
+        completed: false,
+        memo: ""
+      },
+      {
+        id: "chk-store-02",
+        category: "store",
+        categoryName: "점포 운영 및 진열 환경",
+        title: "POP/가격표 시인성 및 2+ 10% 표기 설치 점검",
+        risk: "medium",
+        deadline: "2026-08-30",
+        department: "VMD팀",
+        store: "all",
+        details: "정상가 및 2개 이상 구매 시 10% 할인가 동시 표기, 와블러/바닥 스티커 시공",
+        completed: false,
+        memo: ""
+      },
+      {
+        id: "chk-store-03",
+        category: "store",
+        categoryName: "점포 운영 및 진열 환경",
+        title: "피크타임 보충 전담 인력 근무표 편성 완료",
+        risk: "medium",
+        deadline: "2026-08-28",
+        department: "점포관리팀",
+        store: "all",
+        details: "점심(11:30~13:30) 및 퇴근(17:30~20:00) 피크타임 전담 보충 파트타이머 1~2인 배정",
+        completed: false,
+        memo: ""
+      },
+
+      // 2. SCM 및 물류 점검
+      {
+        id: "chk-scm-01",
+        category: "scm",
+        categoryName: "SCM 및 콜드체인 물류",
+        title: "협력사별 일일 최대 생산/공급 캐파(CAPA 200%) 확약서 접수",
+        risk: "high",
+        deadline: "2026-08-22",
+        department: "SCM/구매팀",
+        store: "all",
+        details: "6종 품목 평시 대비 180~200% 물량 공급 보증 및 D-3 입고 일정 조율",
+        completed: false,
+        memo: ""
+      },
+      {
+        id: "chk-scm-02",
+        category: "scm",
+        categoryName: "SCM 및 콜드체인 물류",
+        title: "입고 잔여 유통기한 기준(소비기한 70% 이상) 통제 확립",
+        risk: "high",
+        deadline: "2026-08-26",
+        department: "SCM/구매팀",
+        store: "all",
+        details: "냉장 신선도 유지를 위해 잔여 유통기한 70% 미만 상품 물류센터 입고 즉시 반송 조치",
+        completed: false,
+        memo: ""
+      },
+      {
+        id: "chk-scm-03",
+        category: "scm",
+        categoryName: "SCM 및 콜드체인 물류",
+        title: "점간 긴급 이동(센트럴→리버/파크) 콜드체인(0~4℃) 프로토콜 수립",
+        risk: "high",
+        deadline: "2026-08-26",
+        department: "물류팀",
+        store: "all",
+        details: "센트럴 거점 안전재고 분산 및 긴급 보냉 차량 배차 퀵 서비스 계약 완료",
+        completed: false,
+        memo: ""
+      },
+      {
+        id: "chk-scm-04",
+        category: "scm",
+        categoryName: "SCM 및 콜드체인 물류",
+        title: "센트럴점 후방 백룸 안전재고(20%) 전용 냉장 공간 확보",
+        risk: "medium",
+        deadline: "2026-08-29",
+        department: "센트럴점",
+        store: "central",
+        details: "센트럴점 백룸 내 HMR 6종 전용 팔레트 및 콜드체인 유지 공간 사전 구획",
+        completed: false,
+        memo: ""
+      },
+
+      // 3. POS 및 결제 시스템 점검
+      {
+        id: "chk-it-01",
+        category: "it",
+        categoryName: "POS 시스템 및 결제 로직",
+        title: "POS 번들 할인(교차 2개 이상 10%) 사전 테스트베드 검증",
+        risk: "high",
+        deadline: "2026-08-27",
+        department: "IT운영팀",
+        store: "all",
+        details: "행사코드 PR20260904_HMR 등록, 교차 2/3/5개 구매 시 10% 자동 할인 검증",
+        completed: false,
+        memo: ""
+      },
+      {
+        id: "chk-it-02",
+        category: "it",
+        categoryName: "POS 시스템 및 결제 로직",
+        title: "신세계포인트 적립 및 통신사/제휴할인 복합 결제 정상 처리 검수",
+        risk: "medium",
+        deadline: "2026-08-27",
+        department: "IT운영팀",
+        store: "all",
+        details: "10% 할인 적용 후 최종 결제금액 기준 포인트 적립 및 카드 할인 중복 순서 확인",
+        completed: false,
+        memo: ""
+      },
+      {
+        id: "chk-it-03",
+        category: "it",
+        categoryName: "POS 시스템 및 결제 로직",
+        title: "영수증 상 프로모션명 및 개별 할인액 표기 포맷 검수",
+        risk: "medium",
+        deadline: "2026-08-28",
+        department: "IT운영팀",
+        store: "all",
+        details: "영수증에 [행사] 냉장간편식 2+ 10% 및 차감 내역 명확 표기 확인",
+        completed: false,
+        memo: ""
+      },
+      {
+        id: "chk-it-04",
+        category: "it",
+        categoryName: "POS 시스템 및 결제 로직",
+        title: "부분 환불/취소 시 POS 자동 재계산 및 수기 입력 차단 검증",
+        risk: "high",
+        deadline: "2026-08-29",
+        department: "IT운영팀",
+        store: "all",
+        details: "2개 구매 후 1개 환불 시 잔여 1개 정상가 환원 처리 및 수기 가격 수정 원천 차단",
+        completed: false,
+        memo: ""
+      },
+
+      // 4. 현장 CS 교육 및 컴플라이언스
+      {
+        id: "chk-cs-01",
+        category: "cs",
+        categoryName: "현장 CS 교육 및 컴플라이언스",
+        title: "현장 근무자 100% 고객 응대 롤플레잉 교육 이수",
+        risk: "high",
+        deadline: "2026-09-02",
+        department: "점포관리팀",
+        store: "all",
+        details: "단품 할인 불가 안내 멘트 및 조기 품절 시 대체 상품 정중 안내 멘트 숙지",
+        completed: false,
+        memo: ""
+      },
+      {
+        id: "chk-cs-02",
+        category: "cs",
+        categoryName: "현장 CS 교육 및 컴플라이언스",
+        title: "🚨 필수 준수 4대 금지 사항 전 직원 서약 완료",
+        risk: "high",
+        deadline: "2026-09-02",
+        department: "점포관리팀",
+        store: "all",
+        details: "① 가격 임의변경 금지 ② 고객 임의보상 약속 금지 ③ 외부메일 자동발송 금지 ④ 로그/데이터 삭제 금지",
+        completed: false,
+        memo: ""
+      },
+      {
+        id: "chk-cs-03",
+        category: "cs",
+        categoryName: "현장 CS 교육 및 컴플라이언스",
+        title: "계산대 및 매대 전면 '교차 구매 안내' & '품절 안내' 배너 비치",
+        risk: "medium",
+        deadline: "2026-09-03",
+        department: "VMD/점포관리팀",
+        store: "all",
+        details: "고객 혼선 방지를 위한 공식 안내문 계산대 및 행사 매대 전면 부착",
+        completed: false,
+        memo: ""
+      },
+
+      // 5. 예산 통제 및 비상 대응
+      {
+        id: "chk-budget-01",
+        category: "budget",
+        categoryName: "예산 통제 및 비상 대응 체계",
+        title: "일일 할인 보전금 소진율 모니터링 알림선(450만원/80%) 설정",
+        risk: "medium",
+        deadline: "2026-09-01",
+        department: "마케팅/재무팀",
+        store: "all",
+        details: "예상 판매 6,000개 초과 시 할인 보전금 570만원 및 총 예산 800만원 초과 방지선 가동",
+        completed: false,
+        memo: ""
+      },
+      {
+        id: "chk-budget-02",
+        category: "budget",
+        categoryName: "예산 통제 및 비상 대응 체계",
+        title: "본사 마케팅팀 긴급 핫라인(10분 이내 보고) 가동 준비",
+        risk: "high",
+        deadline: "2026-09-02",
+        department: "마케팅팀",
+        store: "all",
+        details: "현장 결품/POS 오류 발생 시 점포 책임자 1차 대응 후 유선 핫라인 즉시 가동",
+        completed: false,
+        memo: ""
+      }
+    ];
+
+    /* App Global State */
+    let appState = {
+      checklist: [],
+      filterStore: 'all',
+      filterCategory: 'all',
+      filterStatus: 'all',
+      searchQuery: '',
+      cart: {} // { 'HMR-101': 2, ... }
+    };
+
+    /* ==========================================================================
+       Lifecycle & Core Functions
+       ========================================================================== */
+    window.onload = function() {
+      loadStorageData();
+      initCart();
+      startDdayTimer();
+      renderAll();
+    };
+
+    function loadStorageData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          appState.checklist = JSON.parse(saved);
+        } catch (e) {
+          appState.checklist = JSON.parse(JSON.stringify(INITIAL_CHECKLIST));
+        }
+      } else {
+        appState.checklist = JSON.parse(JSON.stringify(INITIAL_CHECKLIST));
+      }
+    }
+
+    function saveStorageData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appState.checklist));
+      renderHeader();
+    }
+
+    function initCart() {
+      HMR_PRODUCTS.forEach(p => {
+        appState.cart[p.id] = 0;
+      });
+    }
+
+    /* D-Day Counter (Target: 2026-09-04 00:00:00 KST) */
+    function startDdayTimer() {
+      const targetDate = new Date('2026-09-04T00:00:00+09:00').getTime();
+
+      function updateTimer() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        const ddayElem = document.getElementById('ddayText');
+        if (!ddayElem) return;
+
+        if (diff > 0) {
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+          const pad = n => String(n).padStart(2, '0');
+          ddayElem.innerText = `D-${days} (${pad(hours)}:${pad(minutes)}:${pad(seconds)})`;
+        } else {
+          const endDate = new Date('2026-09-10T23:59:59+09:00').getTime();
+          if (now <= endDate) {
+            const passDays = Math.floor((now - targetDate) / (1000 * 60 * 60 * 24)) + 1;
+            ddayElem.innerText = `행사 진행 중 (D+${passDays}일 차)`;
+          } else {
+            ddayElem.innerText = `행사 종료`;
+          }
+        }
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    }
+
+    /* Main Render Orchestrator */
+    function renderAll() {
+      renderHeader();
+      renderChecklist();
+      renderProducts();
+      renderCalcSummary();
+      updateBudgetTracker(document.getElementById('budgetSlider') ? document.getElementById('budgetSlider').value : 4500);
+    }
+
+    /* Render Header Progress */
+    function renderHeader() {
+      const total = appState.checklist.length;
+      const completed = appState.checklist.filter(item => item.completed).length;
+      const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+      document.getElementById('progressPercent').innerText = `${percent}% (${completed} / ${total} 항목 완료)`;
+      document.getElementById('progressBar').style.width = `${percent}%`;
+    }
+
+    /* Render Dynamic Checklist */
+    function renderChecklist() {
+      const container = document.getElementById('checklistContainer');
+      container.innerHTML = '';
+
+      // Filter Items
+      const filtered = appState.checklist.filter(item => {
+        // Store
+        if (appState.filterStore !== 'all') {
+          if (item.store !== 'all' && item.store !== appState.filterStore) return false;
+        }
+        // Category
+        if (appState.filterCategory !== 'all' && item.category !== appState.filterCategory) return false;
+        // Status
+        if (appState.filterStatus === 'uncompleted' && item.completed) return false;
+        if (appState.filterStatus === 'completed' && !item.completed) return false;
+        if (appState.filterStatus === 'high-risk' && item.risk !== 'high') return false;
+        // Search
+        if (appState.searchQuery.trim() !== '') {
+          const query = appState.searchQuery.toLowerCase();
+          const matchTitle = item.title.toLowerCase().includes(query);
+          const matchDept = item.department.toLowerCase().includes(query);
+          const matchDetails = item.details.toLowerCase().includes(query);
+          if (!matchTitle && !matchDept && !matchDetails) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="background:#fff; padding:40px; text-align:center; border-radius:10px; color:var(--color-text-sub);">
+            조건에 부합하는 체크리스트 항목이 없습니다.
+          </div>`;
+        return;
+      }
+
+      // Group by Category
+      const categoriesMap = {};
+      filtered.forEach(item => {
+        if (!categoriesMap[item.categoryName]) {
+          categoriesMap[item.categoryName] = [];
+        }
+        categoriesMap[item.categoryName].push(item);
+      });
+
+      for (const [catName, items] of Object.entries(categoriesMap)) {
+        const block = document.createElement('div');
+        block.className = 'category-block';
+
+        const completedInCat = items.filter(i => i.completed).length;
+
+        block.innerHTML = `
+          <div class="category-header">
+            <span>${catName}</span>
+            <span class="category-count">${completedInCat}/${items.length} 완료</span>
+          </div>
+          <div class="category-body"></div>
+        `;
+
+        const body = block.querySelector('.category-body');
+
+        items.forEach(item => {
+          const itemEl = document.createElement('div');
+          itemEl.className = `check-item ${item.completed ? 'completed' : ''}`;
+
+          const riskBadge = item.risk === 'high' 
+            ? `<span class="badge badge-high">High Risk 🔴</span>` 
+            : item.risk === 'medium' 
+            ? `<span class="badge badge-medium">Medium 🟡</span>`
+            : `<span class="badge badge-normal">Normal 🟢</span>`;
+
+          const storeText = item.store === 'all' ? '전체 점포' : item.store === 'central' ? '센트럴점' : item.store === 'river' ? '리버점' : '파크점';
+
+          itemEl.innerHTML = `
+            <div class="check-main-row">
+              <input type="checkbox" class="custom-checkbox" ${item.completed ? 'checked' : ''} onchange="toggleCheck('${item.id}')">
+              <div class="item-content">
+                <div class="item-meta-tags">
+                  ${riskBadge}
+                  <span class="badge badge-dept">${item.department}</span>
+                  <span class="badge badge-store">${storeText}</span>
+                  <span class="badge badge-date">마감: ${item.deadline}</span>
+                </div>
+                <div class="item-title" onclick="toggleCheck('${item.id}')">${item.title}</div>
+                <button class="item-details-toggle" onclick="toggleDetails('details-${item.id}')">
+                  <span>📖 실행가이드/상세</span> <span>▼</span>
+                </button>
+                <div id="details-${item.id}" class="details-box">
+                  ${item.details}
+                </div>
+                <div class="memo-area">
+                  <textarea placeholder="점포별 메모 및 특이사항 입력..." onblur="updateMemo('${item.id}', this.value)">${item.memo || ''}</textarea>
+                </div>
+              </div>
+            </div>
+          `;
+
+          body.appendChild(itemEl);
+        });
+
+        container.appendChild(block);
+      }
+    }
+
+    /* State Handlers for Checklist */
+    function toggleCheck(id) {
+      const item = appState.checklist.find(i => i.id === id);
+      if (item) {
+        item.completed = !item.completed;
+        saveStorageData();
+        renderChecklist();
+      }
+    }
+
+    function toggleDetails(elementId) {
+      const box = document.getElementById(elementId);
+      if (box) {
+        box.classList.toggle('show');
+      }
+    }
+
+    function updateMemo(id, text) {
+      const item = appState.checklist.find(i => i.id === id);
+      if (item) {
+        item.memo = text;
+        saveStorageData();
+      }
+    }
+
+    /* Filter Handlers */
+    function setFilter(type, value, elem) {
+      const parent = elem.parentElement;
+      const pills = parent.querySelectorAll('.tab-pill');
+      pills.forEach(p => p.classList.remove('active'));
+      elem.classList.add('active');
+
+      if (type === 'store') appState.filterStore = value;
+      if (type === 'category') appState.filterCategory = value;
+      if (type === 'status') appState.filterStatus = value;
+
+      renderChecklist();
+    }
+
+    function handleSearch(val) {
+      appState.searchQuery = val;
+      renderChecklist();
+    }
+
+    /* Toolkits Navigation Switcher */
+    function switchToolkit(panelId, btnElem) {
+      const navBtns = btnElem.parentElement.querySelectorAll('.toolkit-nav-btn');
+      navBtns.forEach(b => b.classList.remove('active'));
+      btnElem.classList.add('active');
+
+      document.getElementById('toolkit-calc').style.display = 'none';
+      document.getElementById('toolkit-cs').style.display = 'none';
+      document.getElementById('toolkit-budget').style.display = 'none';
+
+      document.getElementById(`toolkit-${panelId}`).style.display = 'block';
+    }
+
+    /* Tool 1: Simulator Logic */
+    function renderProducts() {
+      const list = document.getElementById('productList');
+      list.innerHTML = '';
+
+      HMR_PRODUCTS.forEach(p => {
+        const qty = appState.cart[p.id] || 0;
+        const item = document.createElement('div');
+        item.className = 'product-item';
+        item.innerHTML = `
+          <div class="p-info">
+            <span class="p-name">${p.name}</span>
+            <span class="p-price">${p.spec} | 정상가 ${p.price.toLocaleString()}원 (할인가 ${p.discountPrice.toLocaleString()}원)</span>
+          </div>
+          <div class="qty-ctrl">
+            <button class="qty-btn" onclick="updateQty('${p.id}', -1)">-</button>
+            <span style="font-weight:700; min-width:18px; text-align:center;">${qty}</span>
+            <button class="qty-btn" onclick="updateQty('${p.id}', 1)">+</button>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function updateQty(id, delta) {
+      const current = appState.cart[id] || 0;
+      const next = Math.max(0, current + delta);
+      appState.cart[id] = next;
+      renderProducts();
+      renderCalcSummary();
+    }
+
+    function setPresetCart(type) {
+      initCart();
+      if (type === 'single') {
+        appState.cart['HMR-101'] = 1;
+      } else if (type === 'same2') {
+        appState.cart['HMR-101'] = 2;
+      } else if (type === 'cross3') {
+        appState.cart['HMR-101'] = 1;
+        appState.cart['HMR-102'] = 1;
+        appState.cart['HMR-103'] = 1;
+      }
+      renderProducts();
+      renderCalcSummary();
+    }
+
+    function resetCart() {
+      initCart();
+      renderProducts();
+      renderCalcSummary();
+    }
+
+    function renderCalcSummary() {
+      let totalQty = 0;
+      let baseTotal = 0;
+      let discountTotal = 0;
+
+      HMR_PRODUCTS.forEach(p => {
+        const qty = appState.cart[p.id] || 0;
+        totalQty += qty;
+        baseTotal += p.price * qty;
+      });
+
+      const isEligible = totalQty >= 2;
+
+      if (isEligible) {
+        HMR_PRODUCTS.forEach(p => {
+          const qty = appState.cart[p.id] || 0;
+          discountTotal += (p.price - p.discountPrice) * qty;
+        });
+      } else {
+        discountTotal = 0;
+      }
+
+      const finalTotal = baseTotal - discountTotal;
+      const points = Math.round(finalTotal * 0.005); // 0.5% 적립 시뮬레이션
+
+      document.getElementById('calcTotalQty').innerText = `${totalQty}개 ${isEligible ? '(10% 할인 적용)' : '(단품 할인불가)'}`;
+      document.getElementById('calcBasePrice').innerText = `${baseTotal.toLocaleString()}원`;
+      document.getElementById('calcDiscountPrice').innerText = `-${discountTotal.toLocaleString()}원`;
+      document.getElementById('calcFinalPrice').innerText = `${finalTotal.toLocaleString()}원`;
+      document.getElementById('calcPoints').innerText = `${points.toLocaleString()}p`;
+    }
+
+    /* Tool 2: CS Accordion */
+    function toggleCS(elem) {
+      const answer = elem.nextElementSibling;
+      answer.classList.toggle('show');
+    }
+
+    /* Tool 4: Budget Tracker Logic */
+    function updateBudgetTracker(val) {
+      const qty = parseInt(val, 10);
+      document.getElementById('budgetItemCountText').innerText = `${qty.toLocaleString()}개`;
+
+      // 1개당 평균 보전금 약 950원
+      const burnVal = qty * 950;
+      const totalBudget = 8000000;
+      const percent = Math.min(100, ((burnVal / totalBudget) * 100)).toFixed(1);
+
+      document.getElementById('budgetBurnVal').innerText = `${burnVal.toLocaleString()}원`;
+      document.getElementById('budgetPercentText').innerText = `${percent}%`;
+
+      const fill = document.getElementById('budgetGaugeFill');
+      const msg = document.getElementById('budgetAlertMsg');
+      fill.style.width = `${percent}%`;
+
+      fill.className = 'budget-fill';
+      if (burnVal >= 5700000) { // 71.25% 위험선
+        fill.classList.add('danger');
+        msg.style.color = 'var(--color-risk-high)';
+        msg.innerText = '🔴 [경고] 예산 한도 도달 위험! 마케팅팀 유선 보고 필요.';
+      } else if (burnVal >= 4500000) { // 56.25% 1차 알림선
+        fill.classList.add('warn');
+        msg.style.color = 'var(--color-risk-med)';
+        msg.innerText = '🟡 [주의] 1차 소진 알림선(450만원) 초과. 모니터링 강화.';
+      } else {
+        msg.style.color = 'var(--color-success)';
+        msg.innerText = '🟢 예산 소진 안전 범위 내 운영 중입니다.';
+      }
+    }
+
+    /* Modal Controls */
+    function openHotlineModal() {
+      document.getElementById('hotlineModal').classList.add('active');
+    }
+
+    function closeHotlineModal() {
+      document.getElementById('hotlineModal').classList.remove('active');
+    }
+
+    /* Toast Notification Helper */
+    function showToast(msg) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerText = msg;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s';
+        setTimeout(() => toast.remove(), 300);
+      }, 2500);
+    }
+
+    /* Data Export / Import & Summary Copy */
+    function copyReportSummary() {
+      const total = appState.checklist.length;
+      const completed = appState.checklist.filter(i => i.completed).length;
+      const percent = Math.round((completed / total) * 100);
+      const uncompletedHighRisk = appState.checklist.filter(i => !i.completed && i.risk === 'high');
+
+      const dateStr = new Date().toLocaleString('ko-KR');
+
+      let text = `[신세계리테일랩] 냉장 간편식 페스타 점검 현황 보고\n`;
+      text += `- 점검 일시: ${dateStr}\n`;
+      text += `- 전체 진행률: ${percent}% (${completed}/${total} 항목 완료)\n`;
+      text += `- 미완료 High Risk 항목: ${uncompletedHighRisk.length}건\n\n`;
+
+      text += `■ 미완료 주요 점검 항목:\n`;
+      const uncompletedAll = appState.checklist.filter(i => !i.completed);
+      if (uncompletedAll.length === 0) {
+        text += `(모든 점검 항목이 완료되었습니다.)\n`;
+      } else {
+        uncompletedAll.forEach((item, idx) => {
+          text += `${idx + 1}. [${item.risk.toUpperCase()}] [${item.department}] ${item.title} (마감: ${item.deadline})\n`;
+        });
+      }
+
+      // Execute Clipboard Copy
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast('📋 점검 현황 요약이 클립보드에 복사되었습니다.');
+      } catch (err) {
+        showToast('클립보드 복사 실패');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function exportJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState.checklist, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `shinsegae_hmr_checklist_${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast('📥 체크리스트 JSON 데이터 다운로드 완료.');
+    }
+
+    function triggerImportJSON() {
+      document.getElementById('importFileInput').click();
+    }
+
+    function importJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (Array.isArray(imported)) {
+            appState.checklist = imported;
+            saveStorageData();
+            renderAll();
+            showToast('📤 JSON 데이터를 성공적으로 불러왔습니다.');
+          } else {
+            showToast('잘못된 JSON 파일 형식입니다.');
+          }
+        } catch (err) {
+          showToast('JSON 파일 파싱 실패.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function confirmResetData() {
+      if (window.confirm("모든 체크리스트 상태 및 작성된 메모를 초기화하시겠습니까?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        loadStorageData();
+        renderAll();
+        showToast('🔄 모든 데이터가 초기화되었습니다.');
+      }
+    }
+  </script>
+</body>
+</html>
